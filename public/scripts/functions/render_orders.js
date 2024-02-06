@@ -42,8 +42,11 @@ export const loadOrder = function(res) {
   for (const order in orders) {
 
     let orderHtml = `
-    <article class="order">
-    <div class="order-username">${orders[order].username}</div>
+    <article class="order" id=[]>
+    <div class="order-header">
+    <span class="order-username">Customer: ${orders[order].username}</span>
+    <button class="btn btn-primary complete-order">Complete Order</button>
+    </div>
       <ul class="order-items">
       `;
     for (const item in orders[order].dishes) {
@@ -59,8 +62,7 @@ export const loadOrder = function(res) {
     </ul>
     <div class="order-total">Total: $${orders[order].total}</div>
     <form class="estimated-time">
-      <label>Order ID:</label>
-      <input value='${order}' name="orderID" type="text" class="orderID" readonly></input>
+      <div class="orderID" id=${order}>Order ID: ${order}</div>
       <div class="time-input-container">`
 
       if (orders[order].estimated_completion) {

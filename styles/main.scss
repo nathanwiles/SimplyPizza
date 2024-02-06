@@ -76,7 +76,12 @@ body {
     background: rgb(101 187 208);
     padding: 10px;
     margin-top: 10px;
-
+    .order-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
     .orderID {
       background-color:inherit;
       border: none;

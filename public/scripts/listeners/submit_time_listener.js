@@ -3,7 +3,7 @@ import { functions } from "../functions/functions_index.js";
 export const submitTimeListener = () => {
   $(".enter-time").on("click", function (e) {
     e.preventDefault();
-    const orderId = $(this).parent().siblings(".orderID").val();
+    const orderId = $(this).parent().siblings(".orderID").attr("id")
     let time = $(this).siblings(".timeInput").val();
     time = functions.formatTimeAmPm(time);
     const data = { orderId, timeInput: time };
