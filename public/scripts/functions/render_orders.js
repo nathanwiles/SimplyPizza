@@ -2,10 +2,10 @@ import { functions } from "./functions_index.js";
 export const loadOrder = function(res) {
   // string to concat to. will hold the resulting html.
   let ordersHtml = ``;
-  // html template for menu item
-  // loop through items and add to menuHtml
+  // html template for order
+  // loop through items and add to orderHtml.
   const data = res.order;
-  const orders = {};
+  const orders = [];
 
   for (const item in data) {
 
@@ -29,10 +29,7 @@ export const loadOrder = function(res) {
       };
       const total = data[item].total / 100;
 
-      const dish = {
-        name: '',
-        qty: 0
-      };
+      const dish = {};
       dish.name = data[item].dishname;
       dish.qty = data[item].quantity;
       orders[orderId].dishes.push(dish);
@@ -54,7 +51,7 @@ export const loadOrder = function(res) {
       const name = orders[order].dishes[item].name;
       const quantity = orders[order].dishes[item].qty;
 
-      const string = `<li>${name}, quantity: ${quantity}</li>`;
+      const string = `<li>${name} x ${quantity}</li>`;
       orderHtml += string;
 
     }
@@ -81,7 +78,7 @@ export const loadOrder = function(res) {
     </article>
     `
     orderHtml += closingHtml;
-    ordersHtml += orderHtml;
+    ordersHtml = orderHtml + ordersHtml;
 
   }
 
