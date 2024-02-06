@@ -2,8 +2,9 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db/connection');
 require('dotenv').config();
-const accountSid = process.env.ACCOUNTSID;
-const authToken = process.env.AUTHTOKEN;
+const accountSid = process.env.TWILLIO_ACCOUNT_SID;
+const authToken = process.env.TWILLIO_AUTH_TOKEN;
+const twilioPhone = process.env.TWILIO_PHONE;
 const textPhone = process.env.TEXTPHONE;
 
 const client = require('twilio')(accountSid, authToken);
@@ -48,16 +49,14 @@ router.post("/send-twilio-text", (req, res) => {
     // Send Twilio text to the restaurant
     const confirmedOrder = [];
     for (const order of orderDetails) {
-      confirmedOrder.push(`Name: ${order.itemName} \n Quantity: ${order.quantity}`);
+      confirmedOrder.push(`- ${order.itemName} x ${order.quantity}`);
     }
-
+cd 
 
     client.messages.create(
       {
-        body: `Incoming order details:\n
-        ${confirmedOrder.join('\n')}
-        Total: ${orderTotal}`,
-        from: '+12563201469',
+        body: `Incoming order details:\n\n${confirmedOrder.join('\n')}\n\nTotal: ${orderTotal}`,
+        from: twilioPhone,
         to: textPhone
       }
     ).then((message) => {
